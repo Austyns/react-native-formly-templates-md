@@ -1,0 +1,33 @@
+{
+  "name": "react-native-formly-templates-md",
+  "version": "0.0.1",
+  "description": "Ready made materialized components for your react-native formly forms",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "react-native-material-textfield": "0.5.3"
+  },
+  "peerDependencies": {
+    "lodash": "^4.17.4",
+    "react-native-formly": "^0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Assem-Hafez/react-native-formly-templates-md.git"
+  },
+  "keywords": [
+    "formly",
+    "material-design",
+    "materialized",
+    "templates",
+    "react-native"
+  ],
+  "author": "Assem Hafez <assem.a.hafez@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Assem-Hafez/react-native-formly-templates-md/issues"
+  },
+  "homepage": "https://github.com/Assem-Hafez/react-native-formly-templates-md#readme"
+}
