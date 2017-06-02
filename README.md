@@ -24,12 +24,12 @@ npm install react-native-formly-templates-md --save
 	Example:
 	```js
 	{
-		key: 'myMaterialInput',
+	    key: 'myMaterialInput',
 	    type: 'input',
 	    templateOptions: {
-		    label: "Number Input",
-		    placeholder:"Write a number here",
-		    required:true,
+		label: "Number Input",
+		placeholder:"Write a number here",
+		required:true,
 	        minlength: 3,
 	        type:"number"
 	    }
@@ -80,3 +80,4 @@ ValidationsConfig.addType({
   }
 });
 ```
+Make sure that you add this validations after requiring the template
