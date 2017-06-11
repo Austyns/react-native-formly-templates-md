@@ -3,12 +3,19 @@ import _ from 'lodash'
 let { FieldsConfig, WrappersConfig, ControllersConfig, ValidationsConfig, AsyncValidationsConfig, MessagesConfig } = FormlyConfig;
 
 FieldsConfig.addType([
-  { name: 'input', controller: ['templateOptionsValidators'], component: require('./FormlyTextInput') }
+  { name: 'input', controller: ['inputTOValidators'], component: require('./types/formlyTextInput') },
+  { name: 'radio', wrapper: ['label', 'validationError'], controller: ['requiredTOValidator'], component: require('./types/formlyRadio') }
+]);
+
+
+WrappersConfig.setWrapper([
+  { name: 'label', component: require('./wrappers/formlyLabel') },
+  { name: 'validationError', component: require('./wrappers/formlyVaildationError') },
 ]);
 
 ControllersConfig.addType([
   {
-    name: 'templateOptionsValidators',
+    name: 'inputTOValidators',
     controller: {
       componentWillMount: function () {
         //for initial component adding validation
@@ -44,6 +51,26 @@ ControllersConfig.addType([
           to.pattern ? fieldValidator.subscribeToValidation("pattern", to.pattern) : fieldValidator.unsubscribeToValidation("pattern");
           to.minlength ? fieldValidator.subscribeToValidation("minlength", to.minlength) : fieldValidator.unsubscribeToValidation("minlength");
           to.maxlength ? fieldValidator.subscribeToValidation("maxlength", to.maxlength) : fieldValidator.unsubscribeToValidation("maxlength");
+        }
+      }
+    }
+  },
+  {
+    name: 'requiredTOValidator',
+    controller: {
+      componentWillMount: function () {
+        //for initial component adding validation
+        var to = this.props.config.templateOptions || {};
+        var fieldValidator = this.state.fieldValidator;
+        if (fieldValidator) {
+          to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
+        }
+      },
+      componentWillUpdate: function (nextProps, nextState) {
+        var to = nextProps.config.templateOptions || {};
+        var fieldValidator = this.state.fieldValidator;
+        if (fieldValidator) {
+          to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
         }
       }
     }
