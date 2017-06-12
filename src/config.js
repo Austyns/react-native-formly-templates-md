@@ -10,7 +10,7 @@ FieldsConfig.addType([
 
 WrappersConfig.setWrapper([
   { name: 'label', component: require('./wrappers/formlyLabel') },
-  { name: 'descriptionOrError', component: require('./wrappers/formlyVaildationError') },
+  { name: 'descriptionOrError', component: require('./wrappers/formlyDescriptionOrError') },
 ]);
 
 ControllersConfig.addType([
