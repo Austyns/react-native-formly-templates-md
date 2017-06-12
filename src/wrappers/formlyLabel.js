@@ -23,6 +23,7 @@ var FormlyLabel = React.createClass({
 
 const defaultComponentStyle = StyleSheet.create({
   Label: {
+    color: 'rgba(0, 0, 0, .38)',
     fontSize: 12,
     paddingTop: 32
   },

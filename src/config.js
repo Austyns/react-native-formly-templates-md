@@ -4,13 +4,13 @@ let { FieldsConfig, WrappersConfig, ControllersConfig, ValidationsConfig, AsyncV
 
 FieldsConfig.addType([
   { name: 'input', controller: ['inputTOValidators'], component: require('./types/formlyTextInput') },
-  { name: 'radio', wrapper: ['label', 'validationError'], controller: ['requiredTOValidator'], component: require('./types/formlyRadio') }
+  { name: 'radio', wrapper: ['label', 'descriptionOrError'], controller: ['requiredTOValidator'], component: require('./types/formlyRadio') }
 ]);
 
 
 WrappersConfig.setWrapper([
   { name: 'label', component: require('./wrappers/formlyLabel') },
-  { name: 'validationError', component: require('./wrappers/formlyVaildationError') },
+  { name: 'descriptionOrError', component: require('./wrappers/formlyVaildationError') },
 ]);
 
 ControllersConfig.addType([

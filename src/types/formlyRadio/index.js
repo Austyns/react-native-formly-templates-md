@@ -11,6 +11,17 @@ import {
 
 var FormlyRadio = React.createClass({
   mixins: [FieldMixin],
+  propTypes: {
+    templateOptions: React.PropTypes.shape({
+      required: React.PropTypes.bool,
+      disabled: React.PropTypes.bool,
+      description: React.PropTypes.string,
+      label: React.PropTypes.string,
+      labelProp: React.PropTypes.string,
+      valueProp: React.PropTypes.string,
+      options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
+    }),
+  },
   componentWillReceiveProps: function (nextProps) {
     let key = nextProps.config.key;
     var to = nextProps.config.templateOptions || {};
