@@ -12,17 +12,17 @@ npm install react-native-formly-templates-md --save
 
 `templateOptions` Configuration:
 
-	|  name      | description                            | type   						| default
-	|------------| ---------------------------------------|-------------------------------------------------|--------------
-	|label	     | Input Label                            | string 						| -
-	|placeholder | Input placeholder                      | string 						| -
-	|description | Input description                      | string 						| -
-	|required    | Input should have a value              | bool   						| -
-	|disabled    | Input is disabled                      | bool   						| -
-	|minlength   | Minimum character length to be entered | number 						| -
-	|maxlength   | Maximum character length to be entered | number 						| -
-	|type	     | Input text type 		              | string of (`number`, `url`, `email`, `password`)| 'default'
-	|pattern     | The property that contains radio value | string regex					| 'value'
+|  name      | description                            | type   						| default
+|------------| ---------------------------------------|-------------------------------------------------|--------------
+|label	     | Input Label                            | string 						| -
+|placeholder | Input placeholder                      | string 						| -
+|description | Input description                      | string 						| -
+|required    | Input should have a value              | bool   						| -
+|disabled    | Input is disabled                      | bool   						| -
+|minlength   | Minimum character length to be entered | number 						| -
+|maxlength   | Maximum character length to be entered | number 						| -
+|type	     | Input text type 		              | string of (`text`, `number`, `url`, `email`, `password`)| 'text'
+|pattern     | The property that contains radio value | string regex					| 'value'
 
 
 	Example:
@@ -42,17 +42,16 @@ npm install react-native-formly-templates-md --save
 	
 ### radio
 
-`templateOptions` Configuration:
 	
-	|  name         | description                                 | type   | default
-	|---------------|---------------------------------------------|--------|-----------------
-	 label		| Radio group Label                           | string | -
-	 description    | Radio group description                     | string | -
-	 required       | Radio group should have a value             | bool   | -
-	 disabled       | Radio group is disabled                     | bool   | -
-	 options        | Array of radio buttons to be rendered       | array  | []
-	 labelProp      | The property that contains radio label      | string | 'name'
-	 valueProp      | The property that contains radio value      | string | 'value'
+|  name		| description					| type	| default	|
+|---------------|-----------------------------------------------|-------|---------------|
+|label		| Radio group Label| string			| -	|		|
+|description	| Radio group description| string 		| -	|		|
+|required	| Radio group should have a value		| bool	| -		|
+|disabled	| Radio group is disabled| bool			| -	|		|
+|options	| Array of radio buttons to be rendered		| array	|[]		|
+|labelProp	| The property that contains radio label	| string| 'name'	|
+|valueProp	| The property that contains radio value	| string| 'value'	|
 
 
 	Example:
