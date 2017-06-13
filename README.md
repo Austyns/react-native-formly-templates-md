@@ -22,7 +22,7 @@ npm install react-native-formly-templates-md --save
 |minlength   | Minimum character length to be entered | number 						| -
 |maxlength   | Maximum character length to be entered | number 						| -
 |type	     | Input text type 		              | string of (`text`, `number`, `url`, `email`, `password`)| 'text'
-|pattern     | The property that contains radio value | string regex					| 'value'
+|pattern     | The property that contains radio value | string regex					|-
 
 
 	Example:
@@ -43,15 +43,15 @@ npm install react-native-formly-templates-md --save
 ### radio
 
 	
-|  name		| description					| type	| default	|
-|---------------|-----------------------------------------------|-------|---------------|
-|label		| Radio group Label| string			| -	|		|
-|description	| Radio group description| string 		| -	|		|
-|required	| Radio group should have a value		| bool	| -		|
-|disabled	| Radio group is disabled| bool			| -	|		|
-|options	| Array of radio buttons to be rendered		| array	|[]		|
-|labelProp	| The property that contains radio label	| string| 'name'	|
-|valueProp	| The property that contains radio value	| string| 'value'	|
+|  name		| description							| type		| default	|
+|---------------|---------------------------------------------------------------|---------------|---------------|
+|label		| Radio group Label| string					| -		|		|
+|description	| Radio group description| string 				| -		|		|
+|required	| Radio group should have a value				| bool		| -		|
+|disabled	| Radio group is disabled| bool					| -		|		|
+|options	| Array of radio buttons to be rendered				| array		|[]		|
+|labelProp	| The property that contains radio label if option is object	| string	| 'name'	|
+|valueProp	| The property that contains radio value if option is object	| string	| 'value'	|
 
 
 	Example:
