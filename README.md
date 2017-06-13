@@ -8,17 +8,21 @@ This is a material template for [react-native-formly](https://github.com/Assem-H
 npm install react-native-formly-templates-md --save
 ```
 ## Components
-* input
+### input
+
 `templateOptions` Configuration:
-	* `label`: string
-	*  `placeholder`: string
-	*  `description` : string
-	*  `required`: bool
-	*  `disabled`: bool
-	*  `minlength`: number
-	*  `maxlength`: number
-	*  `pattern`: string regex
-	*  `type`:  string with one of the following values (`number`, `url`, `email`, `password`).
+
+	|  name      | description                            | type   						| default
+	|------------| ---------------------------------------|-------------------------------------------------|--------------
+	|label	     | Input Label                            | string 						| -
+	|placeholder | Input placeholder                      | string 						| -
+	|description | Input description                      | string 						| -
+	|required    | Input should have a value              | bool   						| -
+	|disabled    | Input is disabled                      | bool   						| -
+	|minlength   | Minimum character length to be entered | number 						| -
+	|maxlength   | Maximum character length to be entered | number 						| -
+	|type	     | Input text type 		              | string of (`number`, `url`, `email`, `password`)| 'default'
+	|pattern     | The property that contains radio value | string regex					| 'value'
 
 
 	Example:
@@ -35,7 +39,42 @@ npm install react-native-formly-templates-md --save
 	    }
 	}
 	```
-Currently we are working on the rest of the components. (next... select &radio).
+	
+### radio
+
+`templateOptions` Configuration:
+	
+	|  name         | description                                 | type   | default
+	|---------------|---------------------------------------------|--------|-----------------
+	 label		| Radio group Label                           | string | -
+	 description    | Radio group description                     | string | -
+	 required       | Radio group should have a value             | bool   | -
+	 disabled       | Radio group is disabled                     | bool   | -
+	 options        | Array of radio buttons to be rendered       | array  | []
+	 labelProp      | The property that contains radio label      | string | 'name'
+	 valueProp      | The property that contains radio value      | string | 'value'
+
+
+	Example:
+	```js
+	{
+	    key: 'myMaterialRadio',
+	    type: 'radio',
+	    templateOptions: {
+		label: "Radio Input",
+		required:true,
+		description : "Select your type",
+		options:[
+			"string",
+			2,
+			{name:"array", value:[1,2,3]},
+			{name:"date", value: new Date()},
+			{name:"object", value:{prop1:"value1"}}
+			]
+
+	    }
+	}
+	```
 
 ## Configuring Validation
 Available validations are:
