@@ -119,3 +119,10 @@ ValidationsConfig.addType({
 });
 ```
 Make sure that you add this validations after requiring the template
+
+## Roadmap
+
+* [] checkbox
+* [] multicheckbox
+* [] customizable themes
+* [] select
