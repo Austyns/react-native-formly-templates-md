@@ -122,6 +122,9 @@ Make sure that you add this validations after requiring the template
 
 ## Roadmap
 
+* [x] input
+* [x] radio
+* [ ] textarea
 * [ ] checkbox
 * [ ] multicheckbox
 * [ ] customizable themes
