@@ -25,21 +25,88 @@ npm install react-native-formly-templates-md --save
 |pattern     | The property that contains radio value | string regex					|-
 
 
-	Example:
-	```js
-	{
-	    key: 'myMaterialInput',
-	    type: 'input',
-	    templateOptions: {
+Example:
+```js
+{
+	key: 'myMaterialInput',
+	type: 'input',
+	templateOptions: {
 		label: "Number Input",
 		placeholder:"Write a number here",
 		required:true,
 	        minlength: 3,
 	        type:"number"
-	    }
 	}
-	```
+}
+```
 	
+### textarea
+
+`templateOptions` Configuration:
+
+|  name      | description                            | type   						| default
+|------------| ---------------------------------------|-------------------------------------------------|--------------
+|label	     | Input Label                            | string 						| -
+|placeholder | Input placeholder                      | string 						| -
+|description | Input description                      | string 						| -
+|required    | Input should have a value              | bool   						| -
+|disabled    | Input is disabled                      | bool   						| -
+|minlength   | Minimum character length to be entered | number 						| -
+|maxlength   | Maximum character length to be entered | number 						| -
+|type	     | Input text type 		              | string of (`text`, `number`, `url`, `email`)	| 'text'
+|pattern     | The property that contains radio value | string regex					|-
+
+
+Example:
+```js	
+{
+	key: 'myMaterialTextarea',
+	type: 'textarea',
+	templateOptions: {
+		label: "Textarea",
+		placeholder:"Say something here",
+		required:true,
+		maxlength: 200
+	}
+}
+	
+```
+
+### select
+
+	
+|  name		| description							| type		| default	|
+|---------------|---------------------------------------------------------------|---------------|---------------|
+|label		| Radio group Label| string					| -		|		|
+|description	| Radio group description| string 				| -		|		|
+|required	| Radio group should have a value				| bool		| -		|
+|disabled	| Radio group is disabled| bool					| -		|		|
+|minlength   	| Minimum character length to be entered 			| number 	| -		|
+|maxlength   	| Maximum character length to be entered 			| number 	| -		|
+|options	| Array of select options to be rendered			| array		| []		|
+|labelProp	| The property that contains radio label if option is object	| string	| 'name'	|
+|valueProp	| The property that contains radio value if option is object	| string	| 'value'	|
+|pattern     	| The property that contains radio value 			| string regex	| -
+
+
+Example:
+```js
+{
+	key: 'myMaterialSelect',
+	type: 'select',
+	templateOptions: {
+		label: 'Select',
+		required: true,
+		description : 'Select your type',
+		options:[
+			'string',
+			2,
+			{name:'label', value:'value'}
+			]
+	}
+}
+```
+
 ### radio
 
 	
@@ -49,31 +116,33 @@ npm install react-native-formly-templates-md --save
 |description	| Radio group description| string 				| -		|		|
 |required	| Radio group should have a value				| bool		| -		|
 |disabled	| Radio group is disabled| bool					| -		|		|
-|options	| Array of radio buttons to be rendered				| array		|[]		|
+|minlength   	| Minimum character length to be entered 			| number 	| -		|
+|maxlength   	| Maximum character length to be entered 			| number 	| -		|
+|options	| Array of radio buttons to be rendered				| array		| []		|
 |labelProp	| The property that contains radio label if option is object	| string	| 'name'	|
 |valueProp	| The property that contains radio value if option is object	| string	| 'value'	|
+|pattern     	| The property that contains radio value 			| string regex	| -
 
 
-	Example:
-	```js
-	{
-	    key: 'myMaterialRadio',
-	    type: 'radio',
-	    templateOptions: {
-		label: "Radio Input",
+Example:
+```js
+{
+	key: 'myMaterialRadio',
+	type: 'radio',
+	templateOptions: {
+		label: 'Radio Input',
 		required:true,
-		description : "Select your type",
+		description : 'Select your type',
 		options:[
 			"string",
 			2,
-			{name:"array", value:[1,2,3]},
-			{name:"date", value: new Date()},
-			{name:"object", value:{prop1:"value1"}}
+			{name:'array', value:[1,2,3]},
+			{name:'date', value: new Date()},
+			{name:'object', value:{prop1:'value1'}}
 			]
-
-	    }
 	}
-	```
+}
+```
 
 ## Configuring Validation
 Available validations are:
@@ -124,8 +193,8 @@ Make sure that you add this validations after requiring the template
 
 * [x] input
 * [x] radio
-* [ ] textarea
+* [x] textarea
 * [ ] checkbox
 * [ ] multicheckbox
 * [ ] customizable themes
-* [ ] select
+* [x] select
