@@ -1,6 +1,6 @@
 {
   "name": "react-native-formly-templates-md",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ready made materialized components for your react-native formly forms",
   "main": "src/index.js",
   "scripts": {
