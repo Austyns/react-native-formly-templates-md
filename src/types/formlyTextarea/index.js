@@ -35,7 +35,6 @@ var FormlyTextInput = React.createClass({
         var fieldValidationResult = this.props.fieldValidation || {};
         let validationMessages = fieldValidationResult.messages || {};
         let firstMessage = Object.values(validationMessages)[0];
-        this._allowTextOnly(viewValue);
 
         return (
             <View style={{ flex: 1 }}>
@@ -43,7 +42,7 @@ var FormlyTextInput = React.createClass({
                     label={label}
                     placeholder={to.placeholder}
                     disabled={to.disabled}
-                    value={viewValue}
+                    value={_.toString(viewValue)}
                     onChangeText={this.onChange}
                     characterRestriction={to.maxlength}
                     title={to.description}
@@ -56,10 +55,6 @@ var FormlyTextInput = React.createClass({
                      so it gives the error style to the component */}
             </View>
         );
-    },
-    _allowTextOnly: function (value) {
-        if (value !== null && value !== undefined && !_.isString(value))
-            this.onChange(undefined)
     },
     _setkeyboardType: function (keyboardType) {
         switch (keyboardType) {
