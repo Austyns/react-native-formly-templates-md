@@ -3,8 +3,10 @@ import _ from 'lodash'
 let { FieldsConfig, WrappersConfig, ControllersConfig, ValidationsConfig, AsyncValidationsConfig, MessagesConfig } = FormlyConfig;
 
 FieldsConfig.addType([
-  { name: 'input', controller: ['inputTOValidators'], component: require('./types/formlyTextInput') },
-  { name: 'radio', wrapper: ['label', 'descriptionOrError'], controller: ['requiredTOValidator'], component: require('./types/formlyRadio') }
+  { name: 'input', controller: ['inputTypeValidators','templateOptionsValidators'], component: require('./types/formlyTextInput') },
+  { name: 'textarea', controller: ['inputTypeValidators','templateOptionsValidators'], component: require('./types/formlyTextarea') },
+  { name: 'radio', wrapper: ['label', 'descriptionOrError'], controller: ['templateOptionsValidators'], component: require('./types/formlyRadio') },
+  { name: 'select', controller: ['templateOptionsValidators'], component: require('./types/formlySelect') }
 ]);
 
 
@@ -15,7 +17,7 @@ WrappersConfig.setWrapper([
 
 ControllersConfig.addType([
   {
-    name: 'inputTOValidators',
+    name: 'templateOptionsValidators',
     controller: {
       componentWillMount: function () {
         //for initial component adding validation
@@ -23,31 +25,16 @@ ControllersConfig.addType([
         var fieldValidator = this.state.fieldValidator;
         if (fieldValidator) {
           to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
-          fieldValidator.unsubscribeToValidation(['email', 'number', 'url']);
-          switch (to.type) {
-            case "number":
-            case "email":
-            case "url":
-              fieldValidator.subscribeToValidation(to.type);
-          }
           to.pattern ? fieldValidator.subscribeToValidation("pattern", to.pattern) : fieldValidator.unsubscribeToValidation("pattern");
           to.minlength ? fieldValidator.subscribeToValidation("minlength", to.minlength) : fieldValidator.unsubscribeToValidation("minlength");
           to.maxlength ? fieldValidator.subscribeToValidation("maxlength", to.maxlength) : fieldValidator.unsubscribeToValidation("maxlength");
         }
-
       },
       componentWillUpdate: function (nextProps, nextState) {
         var to = nextProps.config.templateOptions || {};
         var fieldValidator = this.state.fieldValidator;
         if (fieldValidator) {
           to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
-          fieldValidator.unsubscribeToValidation(['email', 'number', 'url']);
-          switch (to.type) {
-            case "number":
-            case "email":
-            case "url":
-              fieldValidator.subscribeToValidation(to.type);
-          }
           to.pattern ? fieldValidator.subscribeToValidation("pattern", to.pattern) : fieldValidator.unsubscribeToValidation("pattern");
           to.minlength ? fieldValidator.subscribeToValidation("minlength", to.minlength) : fieldValidator.unsubscribeToValidation("minlength");
           to.maxlength ? fieldValidator.subscribeToValidation("maxlength", to.maxlength) : fieldValidator.unsubscribeToValidation("maxlength");
@@ -56,21 +43,34 @@ ControllersConfig.addType([
     }
   },
   {
-    name: 'requiredTOValidator',
+    name: 'inputTypeValidators',
     controller: {
       componentWillMount: function () {
         //for initial component adding validation
         var to = this.props.config.templateOptions || {};
         var fieldValidator = this.state.fieldValidator;
         if (fieldValidator) {
-          to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
+          fieldValidator.unsubscribeToValidation(['email', 'number', 'url']);
+          switch (to.type) {
+            case "number":
+            case "email":
+            case "url":
+              fieldValidator.subscribeToValidation(to.type);
+          }
         }
+
       },
       componentWillUpdate: function (nextProps, nextState) {
         var to = nextProps.config.templateOptions || {};
         var fieldValidator = this.state.fieldValidator;
         if (fieldValidator) {
-          to.required ? fieldValidator.subscribeToValidation("required", to.required) : fieldValidator.unsubscribeToValidation("required");
+          fieldValidator.unsubscribeToValidation(['email', 'number', 'url']);
+          switch (to.type) {
+            case "number":
+            case "email":
+            case "url":
+              fieldValidator.subscribeToValidation(to.type);
+          }
         }
       }
     }

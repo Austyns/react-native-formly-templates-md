@@ -13,7 +13,7 @@ var FormlyTextInput = React.createClass({
     propTypes: {
         templateOptions: React.PropTypes.shape({
             required: React.PropTypes.bool,
-            type: React.PropTypes.oneOf(['number', 'url', 'email', 'password']),
+            type: React.PropTypes.oneOf(['number', 'url', 'email']),
             pattern: React.PropTypes.string,
             minlength: React.PropTypes.number,
             maxlength: React.PropTypes.number,
@@ -35,6 +35,7 @@ var FormlyTextInput = React.createClass({
         var fieldValidationResult = this.props.fieldValidation || {};
         let validationMessages = fieldValidationResult.messages || {};
         let firstMessage = Object.values(validationMessages)[0];
+        this._allowTextOnly(viewValue);
 
         return (
             <View style={{ flex: 1 }}>
@@ -42,19 +43,23 @@ var FormlyTextInput = React.createClass({
                     label={label}
                     placeholder={to.placeholder}
                     disabled={to.disabled}
-                    value={_.toString(viewValue)}
+                    value={viewValue}
                     onChangeText={this.onChange}
                     characterRestriction={to.maxlength}
                     title={to.description}
                     keyboardType={this._setkeyboardType(to.type)}
-                    secureTextEntry={to.type === 'password'}
                     autoCapitalize="none"
                     autoCorrect={false}
+                    multiline={true}
                     error={!fieldValidationResult.isValid ? (firstMessage || " ") : null} />
                 {/* if the field is invalid while there are no messages string with empty space should be given to the error property
                      so it gives the error style to the component */}
             </View>
         );
+    },
+    _allowTextOnly: function (value) {
+        if (value !== null && value !== undefined && !_.isString(value))
+            this.onChange(undefined)
     },
     _setkeyboardType: function (keyboardType) {
         switch (keyboardType) {
