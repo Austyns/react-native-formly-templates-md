@@ -4,15 +4,19 @@
   "description": "Ready made materialized components for your react-native formly forms",
   "main": "src/index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-react-native"
   },
   "dependencies": {
-    "react-native-material-textfield": "0.5.3",
-    "react-native-material-ripple": "0.7.2"
-  },
-  "peerDependencies": {
+    "react-native-material-ripple": "^0.7.5",
+    "react-native-material-textfield": "^0.10.0",
     "lodash": "^4.17.4",
     "react-native-formly": "^0.0.1"
+  },
+  "peerDependencies": {
+    "react-native": "*"
   },
   "repository": {
     "type": "git",
@@ -30,5 +34,12 @@
   "bugs": {
     "url": "https://github.com/Assem-Hafez/react-native-formly-templates-md/issues"
   },
-  "homepage": "https://github.com/Assem-Hafez/react-native-formly-templates-md#readme"
+  "homepage": "https://github.com/Assem-Hafez/react-native-formly-templates-md#readme",
+  "devDependencies": {
+    "babel-jest": "^21.0.2",
+    "babel-preset-react-native": "^4.0.0",
+    "jest": "^21.1.0",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "^15.6.1"
+  }
 }
