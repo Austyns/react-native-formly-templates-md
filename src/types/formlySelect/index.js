@@ -5,7 +5,8 @@ import {
     Text,
     TextInput
 } from 'react-native';
-import { TextField } from 'react-native-material-textfield';
+import { Dropdown } from 'react-native-material-dropdown';
+import * as helpers from './../../helpers';
 import _ from 'lodash';
 
 var FormlyTextInput = React.createClass({
@@ -13,7 +14,6 @@ var FormlyTextInput = React.createClass({
     propTypes: {
         templateOptions: React.PropTypes.shape({
             required: React.PropTypes.bool,
-            type: React.PropTypes.oneOf(['number', 'url', 'email', 'password']),
             pattern: React.PropTypes.string,
             minlength: React.PropTypes.number,
             maxlength: React.PropTypes.number,
@@ -21,8 +21,20 @@ var FormlyTextInput = React.createClass({
             description: React.PropTypes.string,
             label: React.PropTypes.string,
             placeholder: React.PropTypes.string,
+            labelProp: React.PropTypes.string,
+            valueProp: React.PropTypes.string,
+            options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
 
         }),
+    },
+    componentWillReceiveProps: function (nextProps) {
+        let key = nextProps.config.key;
+        var to = nextProps.config.templateOptions || {};
+        let model = nextProps.model[key];
+        if (model !== undefined && !helpers.valueExistsInOptions(to.labelProp, to.valueProp, to.options, model)) {
+            //if the value doesn't exists in options update the model with undefined
+            //this.onChange(undefined);
+        }
     },
     render: function () {
         let key = this.props.config.key;
@@ -38,35 +50,33 @@ var FormlyTextInput = React.createClass({
 
         return (
             <View style={{ flex: 1 }}>
-                <TextField
+                 {/*currently the dropdown has an issue with objects/arrays in case initializing the with them. The dropdown can't select the correct value*/}
+                 {/*characterRestriction in the dropdown has an issue that it calculates the length of the label not the value*/}
+                <Dropdown
                     label={label}
                     placeholder={to.placeholder}
                     disabled={to.disabled}
-                    value={_.toString(viewValue)}
+                    data={this._dataFromTemplateOptions(to)}
+                    value={viewValue}
                     onChangeText={this.onChange}
-                    characterRestriction={to.maxlength}
                     title={to.description}
-                    keyboardType={this._setkeyboardType(to.type)}
-                    secureTextEntry={to.type === 'password'}
-                    autoCapitalize="none"
-                    autoCorrect={false}
+                    animationDuration={150}
                     error={!fieldValidationResult.isValid ? (firstMessage || " ") : null} />
                 {/* if the field is invalid while there are no messages string with empty space should be given to the error property
                      so it gives the error style to the component */}
             </View>
         );
     },
-    _setkeyboardType: function (keyboardType) {
-        switch (keyboardType) {
-            case "number":
-                return 'numeric';
-            case "email":
-                return 'email-address';
-            case "url":
-                return 'url';
-            default:
-                return 'default';
+    _dataFromTemplateOptions(to = {}) {
+        let items = [];
+        //check if the options is of type array
+        if (Array.isArray(to.options)) {
+            items = to.options.map(function (option, index) {
+                return helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
+            }, this);
         }
+
+        return items;
     }
 });
 
