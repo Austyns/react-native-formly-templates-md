@@ -1,1 +1,1 @@
-import * as FormlyConfig from './config';
+require('./config');
