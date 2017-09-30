@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 
 const FormlyDescriptionOrError = React.createClass({
@@ -29,21 +29,21 @@ const FormlyDescriptionOrError = React.createClass({
       return <Text style={defaultComponentStyle.DescriptionText}>{to.description}</Text>;
     }
     return null;
-  },
+  }
 });
 
 const defaultComponentStyle = StyleSheet.create({
   VaildationErrorText: {
     color: 'red',
-    fontSize: 12,
+    fontSize: 12
   },
   DescriptionText: {
     color: 'rgba(0, 0, 0, .38)',
-    fontSize: 12,
+    fontSize: 12
   },
   Container: {
-    flex: 1,
-  },
+    flex: 1
+  }
 });
 
 module.exports = FormlyDescriptionOrError;

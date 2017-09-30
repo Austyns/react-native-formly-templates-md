@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldMixin } from 'react-native-formly';
 import {
-  View,
+  View
 } from 'react-native';
 import { RadioButton, RadioGroup } from './radio-md';
 import * as helpers from './../../helpers';
@@ -9,19 +9,21 @@ import * as helpers from './../../helpers';
 const FormlyRadio = React.createClass({
   mixins: [FieldMixin],
   propTypes: {
-    templateOptions: React.PropTypes.shape({
-      required: React.PropTypes.bool,
-      pattern: React.PropTypes.string,
-      minlength: React.PropTypes.number,
-      maxlength: React.PropTypes.number,
-      disabled: React.PropTypes.bool,
-      description: React.PropTypes.string,
-      label: React.PropTypes.string,
-      placeholder: React.PropTypes.string,
-      labelProp: React.PropTypes.string,
-      valueProp: React.PropTypes.string,
-      options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-    }),
+    config: React.PropTypes.shape({
+      templateOptions: React.PropTypes.shape({
+        required: React.PropTypes.bool,
+        pattern: React.PropTypes.string,
+        minlength: React.PropTypes.number,
+        maxlength: React.PropTypes.number,
+        disabled: React.PropTypes.bool,
+        description: React.PropTypes.string,
+        label: React.PropTypes.string,
+        placeholder: React.PropTypes.string,
+        labelProp: React.PropTypes.string,
+        valueProp: React.PropTypes.string,
+        options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
+      })
+    }).isRequired
   },
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
@@ -62,21 +64,21 @@ const FormlyRadio = React.createClass({
       to.options.forEach((option) => {
         const {
           label,
-          value,
+          value
         } = helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
         items.push(<RadioButton id={value} label={label} />);
       }, this);
     }
 
     return items;
-  },
+  }
 
 });
 
 const defaultComponentStyle = {
   RadioContainer: {
-    margin: 1,
-  },
+    margin: 1
+  }
 };
 
 module.exports = FormlyRadio;

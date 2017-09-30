@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
+  StyleSheet
 } from 'react-native';
 
 
@@ -17,19 +17,19 @@ const FormlyLabel = React.createClass({
         {this.props.children}
       </View>
     );
-  },
+  }
 });
 
 const defaultComponentStyle = StyleSheet.create({
   Label: {
     color: 'rgba(0, 0, 0, .38)',
     fontSize: 12,
-    paddingTop: 32,
+    paddingTop: 32
   },
   Container: {
-    flex: 1,
+    flex: 1
 
-  },
+  }
 });
 
 module.exports = FormlyLabel;

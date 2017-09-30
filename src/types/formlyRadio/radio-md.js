@@ -5,14 +5,14 @@ import {
   Text,
   View,
   Easing,
-  Animated,
+  Animated
 } from 'react-native';
 
 
 const RadioGroup = React.createClass({
   getDefaultProps() {
     return {
-      formHorizontal: false,
+      formHorizontal: false
     };
   },
   getInitialState() {
@@ -57,7 +57,7 @@ const RadioGroup = React.createClass({
           innerToOuterRatio: child.props.innerToOuterRatio || that.props.innerToOuterRatio,
           labelHorizontal: child.props.labelHorizontal || that.props.labelHorizontal,
           labelFontSize: child.props.labelFontSize || that.props.labelFontSize,
-          labelcolor: child.props.labelcolor || that.props.labelcolor,
+          labelcolor: child.props.labelcolor || that.props.labelcolor
         });
       }
 
@@ -74,7 +74,7 @@ const RadioGroup = React.createClass({
   },
   _onButtonPress(id) {
     this.setState({ selectedKey: id });
-  },
+  }
 
 });
 
@@ -92,7 +92,7 @@ const RadioButton = React.createClass({
     innerToOuterRatio: React.PropTypes.number,
     labelHorizontal: React.PropTypes.bool,
     labelFontSize: React.PropTypes.number,
-    labelcolor: React.PropTypes.string,
+    labelcolor: React.PropTypes.string
 
   },
   getDefaultProps() {
@@ -103,12 +103,12 @@ const RadioButton = React.createClass({
       unselectedColor: 'rgba(0,0,0,0.54)',
       scale: 1,
       innerToOuterRatio: 0.65,
-      labelHorizontal: true,
+      labelHorizontal: true
     };
   },
   getInitialState() {
     return {
-      innerScaleValue: new Animated.Value(this.props.isSelected ? 1 : 0),
+      innerScaleValue: new Animated.Value(this.props.isSelected ? 1 : 0)
     };
   },
   selectionChanged(isSelected) {
@@ -116,13 +116,13 @@ const RadioButton = React.createClass({
       Animated.timing(this.state.innerScaleValue, {
         toValue: 1,
         duration: 400,
-        easing: Easing.bounce,
+        easing: Easing.bounce
       }).start();
     } else {
       Animated.timing(this.state.innerScaleValue, {
         toValue: 0,
         duration: 150,
-        easing: Easing.bounce,
+        easing: Easing.bounce
       }).start();
     }
   },
@@ -152,7 +152,7 @@ const RadioButton = React.createClass({
     const maxInnerSize = (outerSize - (outerBorderWidth * 2)) * innerToOuterRatio;
     const currentInnerSize = this.state.innerScaleValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, maxInnerSize],
+      outputRange: [0, maxInnerSize]
     });
 
     return (
@@ -181,7 +181,7 @@ const RadioButton = React.createClass({
                 borderColor: color,
                 borderWidth: outerBorderWidth,
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
               <Animated.View style={
@@ -189,7 +189,7 @@ const RadioButton = React.createClass({
                   width: currentInnerSize,
                   height: currentInnerSize,
                   borderRadius: maxInnerSize / 2,
-                  backgroundColor: color,
+                  backgroundColor: color
                 }
 
               }
@@ -202,7 +202,7 @@ const RadioButton = React.createClass({
         </View>
       </View>
     );
-  },
+  }
 
 });
 

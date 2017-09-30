@@ -2,27 +2,28 @@ import React from 'react';
 import { FieldMixin } from 'react-native-formly';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
-  View,
+  View
 } from 'react-native';
 import * as helpers from './../../helpers';
 
 const FormlyTextInput = React.createClass({
   mixins: [FieldMixin],
   propTypes: {
-    templateOptions: React.PropTypes.shape({
-      required: React.PropTypes.bool,
-      pattern: React.PropTypes.string,
-      minlength: React.PropTypes.number,
-      maxlength: React.PropTypes.number,
-      disabled: React.PropTypes.bool,
-      description: React.PropTypes.string,
-      label: React.PropTypes.string,
-      placeholder: React.PropTypes.string,
-      labelProp: React.PropTypes.string,
-      valueProp: React.PropTypes.string,
-      options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired,
-
-    }),
+    config: React.PropTypes.shape({
+      templateOptions: React.PropTypes.shape({
+        required: React.PropTypes.bool,
+        pattern: React.PropTypes.string,
+        minlength: React.PropTypes.number,
+        maxlength: React.PropTypes.number,
+        disabled: React.PropTypes.bool,
+        description: React.PropTypes.string,
+        label: React.PropTypes.string,
+        placeholder: React.PropTypes.string,
+        labelProp: React.PropTypes.string,
+        valueProp: React.PropTypes.string,
+        options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
+      })
+    }).isRequired
   },
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
@@ -77,7 +78,7 @@ const FormlyTextInput = React.createClass({
     }
 
     return items;
-  },
+  }
 });
 
 module.exports = FormlyTextInput;

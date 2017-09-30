@@ -5,7 +5,7 @@ const {
   FieldsConfig,
   WrappersConfig,
   ControllersConfig,
-  ValidationsConfig,
+  ValidationsConfig
 } = FormlyConfig;
 // require formly types
 const inputComponent = require('./types/formlyTextInput');
@@ -21,30 +21,30 @@ FieldsConfig.addType([
   {
     name: 'input',
     controller: ['inputTypeValidators', 'templateOptionsValidators'],
-    component: inputComponent,
+    component: inputComponent
   },
   {
     name: 'textarea',
     controller: ['inputTypeValidators', 'templateOptionsValidators'],
-    component: textareaComponent,
+    component: textareaComponent
   },
   {
     name: 'radio',
     wrapper: ['label', 'descriptionOrError'],
     controller: ['templateOptionsValidators'],
-    component: radioComponent,
+    component: radioComponent
   },
   {
     name: 'select',
     controller: ['templateOptionsValidators'],
-    component: selectComponent,
-  },
+    component: selectComponent
+  }
 ]);
 
 
 WrappersConfig.setWrapper([
   { name: 'label', component: labelWrapper },
-  { name: 'descriptionOrError', component: descOrErrorWrapper },
+  { name: 'descriptionOrError', component: descOrErrorWrapper }
 ]);
 
 ControllersConfig.addType([
@@ -103,8 +103,8 @@ ControllersConfig.addType([
             fieldValidator.unsubscribeToValidation('maxlength');
           }
         }
-      },
-    },
+      }
+    }
   },
   {
     name: 'inputTypeValidators',
@@ -141,9 +141,9 @@ ControllersConfig.addType([
               break;
           }
         }
-      },
-    },
-  },
+      }
+    }
+  }
 ]);
 
 ValidationsConfig.addType({
@@ -158,42 +158,42 @@ ValidationsConfig.addType({
         isValid = viewValue !== null && viewValue !== undefined;
       }
       return isValid;
-    },
+    }
   },
   url: {
     expression({ viewValue }) {
       const regex = /^([a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+\])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?)?$/i;
       return viewValue === undefined || viewValue === null || regex.test(viewValue);
-    },
+    }
   },
   email: {
     expression({ viewValue }) {
       // eslint-disable-next-line
       const regex = /^((?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+\/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*)?$/;
       return viewValue === undefined || viewValue === null || regex.test(viewValue);
-    },
+    }
   },
   number: {
     expression({ viewValue }) {
       // eslint-disable-next-line
       const regex = /^(\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*)?$/;
       return viewValue === undefined || viewValue === null || regex.test(viewValue);
-    },
+    }
   },
   pattern: {
     expression({ viewValue, param }) {
       const stringifiedViewValue = _.isString(viewValue) ? viewValue : '';
       return new RegExp(param).test(stringifiedViewValue);
-    },
+    }
   },
   minlength: {
     expression({ viewValue, param }) {
       return viewValue && viewValue.length >= param;
-    },
+    }
   },
   maxlength: {
     expression({ viewValue, param }) {
       return (!viewValue && param >= 0) || (viewValue && !(viewValue.length > param));
-    },
-  },
+    }
+  }
 });

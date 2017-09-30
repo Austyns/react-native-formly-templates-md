@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldMixin } from 'react-native-formly';
 import {
-  View,
+  View
 } from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import _ from 'lodash';
@@ -9,18 +9,19 @@ import _ from 'lodash';
 const FormlyTextInput = React.createClass({
   mixins: [FieldMixin],
   propTypes: {
-    templateOptions: React.PropTypes.shape({
-      required: React.PropTypes.bool,
-      type: React.PropTypes.oneOf(['number', 'url', 'email', 'password']),
-      pattern: React.PropTypes.string,
-      minlength: React.PropTypes.number,
-      maxlength: React.PropTypes.number,
-      disabled: React.PropTypes.bool,
-      description: React.PropTypes.string,
-      label: React.PropTypes.string,
-      placeholder: React.PropTypes.string,
-
-    }),
+    config: React.PropTypes.shape({
+      templateOptions: React.PropTypes.shape({
+        required: React.PropTypes.bool,
+        type: React.PropTypes.oneOf(['number', 'url', 'email', 'password']),
+        pattern: React.PropTypes.string,
+        minlength: React.PropTypes.number,
+        maxlength: React.PropTypes.number,
+        disabled: React.PropTypes.bool,
+        description: React.PropTypes.string,
+        label: React.PropTypes.string,
+        placeholder: React.PropTypes.string
+      }).isRequired
+    })
   },
   render() {
     const key = this.props.config.key;
@@ -65,7 +66,7 @@ const FormlyTextInput = React.createClass({
       default:
         return 'default';
     }
-  },
+  }
 });
 
 module.exports = FormlyTextInput;
