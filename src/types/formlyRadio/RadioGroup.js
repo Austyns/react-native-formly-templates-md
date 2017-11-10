@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {
   View
 } from 'react-native';
-
+import RadioButton from './RadioButton';
 
 class RadioGroup extends Component {
   state = {}
@@ -34,9 +34,9 @@ class RadioGroup extends Component {
     const uniqueChildren = _.uniqWith(children, (childOne, childTwo) =>
       _.isEqual(childOne.props.id, childTwo.props.id));
 
-    if (children.length > uniqueChildren.length) { console.warn('Duplicate RadioButton ids'); }
+    if (children.length > uniqueChildren.length) { console.warn('RadioGroup contains RadioButtons with duplicate ids'); }
     return _.map(uniqueChildren, (child) => {
-      if (child.type.displayName === 'RadioButton') {
+      if (child.type === RadioButton) {
         return React.cloneElement(child, {
           isSelected: _.isEqual(selectedKey, child.props.id),
           onButtonPress: buttonOnPress,
@@ -52,7 +52,7 @@ class RadioGroup extends Component {
         });
       }
 
-      console.warn('RadioGroup childrens must be of type RadioButton');
+      console.warn(`RadioGroup childrens must be of type ${RadioButton.displayName}`);
       return null;
     });
   }
