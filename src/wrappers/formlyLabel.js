@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -6,19 +7,30 @@ import {
 } from 'react-native';
 
 
-const FormlyLabel = React.createClass({
-  render() {
-    const to = this.props.config.templateOptions || {};
-    const fieldValidationResult = this.props.fieldValidation || {};
-    return (
-      <View style={[{ marginVertical: 1 }, defaultComponentStyle.Container]}>
-        {to.label ? <Text style={[defaultComponentStyle.Label, { color: fieldValidationResult.isValid ? undefined : 'red' }]}>{to.label + (to.required ? ' *' : '')}</Text>
-          : null}
-        {this.props.children}
-      </View>
-    );
-  }
-});
+const FormlyLabel = (props) => {
+  const to = props.config.templateOptions || {};
+  const fieldValidationResult = props.fieldValidation || {};
+  return (
+    <View style={[{ marginVertical: 1 }, defaultComponentStyle.Container]}>
+      {to.label ? <Text style={[defaultComponentStyle.Label, { color: fieldValidationResult.isValid ? undefined : 'red' }]}>{to.label + (to.required ? ' *' : '')}</Text>
+        : null}
+      {props.children}
+    </View>
+  );
+};
+
+FormlyLabel.propTypes = {
+  config: PropTypes.shape({
+    templateOptions: PropTypes.shape({
+      label: PropTypes.string,
+      required: PropTypes.bool
+    })
+  }).isRequired,
+  fieldValidation: PropTypes.shape({
+    messages: PropTypes.object
+  }),
+  children: PropTypes.element
+};
 
 const defaultComponentStyle = StyleSheet.create({
   Label: {

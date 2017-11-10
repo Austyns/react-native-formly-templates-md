@@ -1,4 +1,6 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { FieldMixin } from 'react-native-formly';
 import {
   View
@@ -6,22 +8,39 @@ import {
 import { TextField } from 'react-native-material-textfield';
 import _ from 'lodash';
 
-const FormlyTextInput = React.createClass({
-  mixins: [FieldMixin],
+const FormlyTextInput = createReactClass({
   propTypes: {
-    config: React.PropTypes.shape({
-      templateOptions: React.PropTypes.shape({
-        required: React.PropTypes.bool,
-        type: React.PropTypes.oneOf(['number', 'url', 'email', 'password']),
-        pattern: React.PropTypes.string,
-        minlength: React.PropTypes.number,
-        maxlength: React.PropTypes.number,
-        disabled: React.PropTypes.bool,
-        description: React.PropTypes.string,
-        label: React.PropTypes.string,
-        placeholder: React.PropTypes.string
+    config: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      templateOptions: PropTypes.shape({
+        required: PropTypes.bool,
+        type: PropTypes.oneOf(['number', 'url', 'email', 'password']),
+        pattern: PropTypes.string,
+        minlength: PropTypes.number,
+        maxlength: PropTypes.number,
+        disabled: PropTypes.bool,
+        description: PropTypes.string,
+        label: PropTypes.string,
+        placeholder: PropTypes.string
       }).isRequired
+    }).isRequired,
+    viewValues: PropTypes.any,
+    fieldValidation: PropTypes.shape({
+      messages: PropTypes.object
     })
+  },
+  mixins: [FieldMixin],
+  _setkeyboardType(keyboardType) {
+    switch (keyboardType) {
+      case 'number':
+        return 'numeric';
+      case 'email':
+        return 'email-address';
+      case 'url':
+        return 'url';
+      default:
+        return 'default';
+    }
   },
   render() {
     const key = this.props.config.key;
@@ -54,18 +73,6 @@ const FormlyTextInput = React.createClass({
           should be given to the error property so it gives the error style to the component */}
       </View>
     );
-  },
-  _setkeyboardType(keyboardType) {
-    switch (keyboardType) {
-      case 'number':
-        return 'numeric';
-      case 'email':
-        return 'email-address';
-      case 'url':
-        return 'url';
-      default:
-        return 'default';
-    }
   }
 });
 

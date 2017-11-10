@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   Text,
   StyleSheet
 } from 'react-native';
 
-const FormlyDescriptionOrError = React.createClass({
-  render() {
-    return (
-      <View style={defaultComponentStyle.Container}>
-        {this.props.children}
-        {this._getText()}
-      </View>
-    );
-  },
-  _getText() {
+class FormlyDescriptionOrError extends Component {
+  _getText = () => {
     const to = this.props.config.templateOptions || {};
     const fieldValidationResult = this.props.fieldValidation || {};
     const messages = fieldValidationResult.messages;
@@ -30,7 +23,28 @@ const FormlyDescriptionOrError = React.createClass({
     }
     return null;
   }
-});
+  render() {
+    return (
+      <View style={defaultComponentStyle.Container}>
+        {this.props.children}
+        {this._getText()}
+      </View>
+    );
+  }
+}
+
+FormlyDescriptionOrError.propTypes = {
+  config: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    templateOptions: PropTypes.shape({
+      description: PropTypes.string
+    })
+  }).isRequired,
+  fieldValidation: PropTypes.shape({
+    messages: PropTypes.object
+  }),
+  children: PropTypes.element
+};
 
 const defaultComponentStyle = StyleSheet.create({
   VaildationErrorText: {

@@ -1,30 +1,36 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { FieldMixin } from 'react-native-formly';
 import {
   View
 } from 'react-native';
-import { RadioButton, RadioGroup } from './radio-md';
+import RadioButton from './RadioButton';
+import RadioGroup from './RadioGroup';
 import * as helpers from './../../helpers';
 
-const FormlyRadio = React.createClass({
-  mixins: [FieldMixin],
+const FormlyRadio = createReactClass({
   propTypes: {
-    config: React.PropTypes.shape({
-      templateOptions: React.PropTypes.shape({
-        required: React.PropTypes.bool,
-        pattern: React.PropTypes.string,
-        minlength: React.PropTypes.number,
-        maxlength: React.PropTypes.number,
-        disabled: React.PropTypes.bool,
-        description: React.PropTypes.string,
-        label: React.PropTypes.string,
-        placeholder: React.PropTypes.string,
-        labelProp: React.PropTypes.string,
-        valueProp: React.PropTypes.string,
-        options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
+    config: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      templateOptions: PropTypes.shape({
+        required: PropTypes.bool,
+        pattern: PropTypes.string,
+        minlength: PropTypes.number,
+        maxlength: PropTypes.number,
+        disabled: PropTypes.bool,
+        description: PropTypes.string,
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+        labelProp: PropTypes.string,
+        valueProp: PropTypes.string,
+        options: PropTypes.arrayOf(PropTypes.any).isRequired
       })
-    }).isRequired
+    }).isRequired,
+    model: PropTypes.any,
+    viewValues: PropTypes.any
   },
+  mixins: [FieldMixin],
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
     const to = nextProps.config.templateOptions || {};
@@ -34,6 +40,21 @@ const FormlyRadio = React.createClass({
       // if the value doesn't exists in options update the model with undefined
       this.onChange(undefined);
     }
+  },
+  _renderItemsFromTemplateOptions(to = {}) {
+    const items = [];
+    // check if the options is of type array
+    if (Array.isArray(to.options)) {
+      to.options.forEach((option) => {
+        const {
+          label,
+          value
+        } = helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
+        items.push(<RadioButton id={value} label={label} />);
+      }, this);
+    }
+
+    return items;
   },
   render() {
     const key = this.props.config.key;
@@ -56,21 +77,6 @@ const FormlyRadio = React.createClass({
         </View>
       </View>
     );
-  },
-  _renderItemsFromTemplateOptions(to = {}) {
-    const items = [];
-    // check if the options is of type array
-    if (Array.isArray(to.options)) {
-      to.options.forEach((option) => {
-        const {
-          label,
-          value
-        } = helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
-        items.push(<RadioButton id={value} label={label} />);
-      }, this);
-    }
-
-    return items;
   }
 
 });

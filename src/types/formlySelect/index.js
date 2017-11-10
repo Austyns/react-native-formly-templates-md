@@ -1,4 +1,6 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { FieldMixin } from 'react-native-formly';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
@@ -6,25 +8,31 @@ import {
 } from 'react-native';
 import * as helpers from './../../helpers';
 
-const FormlyTextInput = React.createClass({
-  mixins: [FieldMixin],
+const FormlyTextInput = createReactClass({
   propTypes: {
-    config: React.PropTypes.shape({
-      templateOptions: React.PropTypes.shape({
-        required: React.PropTypes.bool,
-        pattern: React.PropTypes.string,
-        minlength: React.PropTypes.number,
-        maxlength: React.PropTypes.number,
-        disabled: React.PropTypes.bool,
-        description: React.PropTypes.string,
-        label: React.PropTypes.string,
-        placeholder: React.PropTypes.string,
-        labelProp: React.PropTypes.string,
-        valueProp: React.PropTypes.string,
-        options: React.PropTypes.arrayOf(React.PropTypes.any).isRequired
+    config: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      templateOptions: PropTypes.shape({
+        required: PropTypes.bool,
+        pattern: PropTypes.string,
+        minlength: PropTypes.number,
+        maxlength: PropTypes.number,
+        disabled: PropTypes.bool,
+        description: PropTypes.string,
+        label: PropTypes.string,
+        placeholder: PropTypes.string,
+        labelProp: PropTypes.string,
+        valueProp: PropTypes.string,
+        options: PropTypes.arrayOf(PropTypes.any).isRequired
       })
-    }).isRequired
+    }).isRequired,
+    model: PropTypes.any,
+    viewValues: PropTypes.any,
+    fieldValidation: PropTypes.shape({
+      messages: PropTypes.object
+    })
   },
+  mixins: [FieldMixin],
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
     const to = nextProps.config.templateOptions || {};
@@ -34,6 +42,17 @@ const FormlyTextInput = React.createClass({
       // if the value doesn't exists in options update the model with undefined
       this.onChange(undefined);
     }
+  },
+  _dataFromTemplateOptions(to = {}) {
+    let items = [];
+    // check if the options is of type array
+    if (Array.isArray(to.options)) {
+      items = to.options.map(option =>
+        helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option),
+      );
+    }
+
+    return items;
   },
   render() {
     const key = this.props.config.key;
@@ -67,17 +86,6 @@ const FormlyTextInput = React.createClass({
            should be given to the error property so it gives the error style to the component */}
       </View>
     );
-  },
-  _dataFromTemplateOptions(to = {}) {
-    let items = [];
-    // check if the options is of type array
-    if (Array.isArray(to.options)) {
-      items = to.options.map(option =>
-        helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option),
-      );
-    }
-
-    return items;
   }
 });
 
