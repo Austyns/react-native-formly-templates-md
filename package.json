@@ -22,7 +22,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-formly": "0.0.1"
+    "react-native-formly": "0.0.2"
   },
   "repository": {
     "type": "git",
