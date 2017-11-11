@@ -41,9 +41,9 @@ class RadioButton extends Component {
     if (this.props.disabled) {
       color = this.props.disabledColor;
     } else if (this.props.isSelected) {
-      color = this.props.color;
+      color = this.props.tintColor;
     } else {
-      color = this.props.unselectedColor;
+      color = this.props.baseColor;
     }
     return color;
   }
@@ -104,7 +104,9 @@ class RadioButton extends Component {
           </View>
         </Ripple>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text>{this.props.label}</Text>
+          <Text style={[this.props.labelStyle, { color: this.props.disabled ? this.props.disabledColor : this.props.labelColor }]}>
+            {this.props.label}
+          </Text>
         </View>
       </View>
     );
@@ -114,12 +116,13 @@ class RadioButton extends Component {
 RadioButton.defaultProps = {
   onButtonPress: () => { },
   isSelected: false,
-  color: '#2196f3',
+  tintColor: 'rgb(0, 145, 234)',
   disabledColor: 'rgba(0,0,0,0.26)',
-  unselectedColor: 'rgba(0,0,0,0.54)',
+  baseColor: 'rgba(0,0,0,0.54)',
   scale: 1,
   innerToOuterRatio: 0.65,
-  labelHorizontal: true
+  labelHorizontal: true,
+  labelColor: 'rgba(0, 0, 0, .87)'
 };
 
 RadioButton.propTypes = {
@@ -127,13 +130,15 @@ RadioButton.propTypes = {
   onButtonPress: PropTypes.func,
   isSelected: PropTypes.bool,
   label: PropTypes.string,
-  color: PropTypes.string,
+  tintColor: PropTypes.string,
   disabledColor: PropTypes.string,
-  unselectedColor: PropTypes.string,
+  baseColor: PropTypes.string,
   scale: PropTypes.number,
   disabled: PropTypes.bool,
   innerToOuterRatio: PropTypes.number,
-  labelHorizontal: PropTypes.bool
+  labelHorizontal: PropTypes.bool,
+  labelColor: PropTypes.string,
+  labelStyle: PropTypes.object
 };
 
 module.exports = RadioButton;
