@@ -12,7 +12,7 @@ const FormlyLabel = (props) => {
   const fieldValidationResult = props.fieldValidation || {};
   return (
     <View style={[{ marginVertical: 1 }, defaultComponentStyle.Container]}>
-      {to.label ? <Text style={[defaultComponentStyle.Label, { color: fieldValidationResult.isValid ? undefined : 'red' }]}>{to.label + (to.required ? ' *' : '')}</Text>
+      {to.label ? <Text style={[defaultComponentStyle.Label, { color: fieldValidationResult.isValid ? undefined : 'rgba(213, 0, 0, 1)' }]}>{to.label + (to.required ? ' *' : '')}</Text>
         : null}
       {props.children}
     </View>

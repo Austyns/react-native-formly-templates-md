@@ -48,7 +48,7 @@ FormlyDescriptionOrError.propTypes = {
 
 const defaultComponentStyle = StyleSheet.create({
   VaildationErrorText: {
-    color: 'red',
+    color: 'rgba(213, 0, 0, 1)',
     fontSize: 12
   },
   DescriptionText: {
