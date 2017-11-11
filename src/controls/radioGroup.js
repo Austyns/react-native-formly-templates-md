@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {
   View
 } from 'react-native';
-import RadioButton from './RadioButton';
+import RadioButton from './radioButton';
 
 class RadioGroup extends Component {
   state = {}
@@ -40,15 +40,16 @@ class RadioGroup extends Component {
         return React.cloneElement(child, {
           isSelected: _.isEqual(selectedKey, child.props.id),
           onButtonPress: buttonOnPress,
-          color: child.props.color || that.props.color,
-          disabledColor: child.props.disabledColor || that.props.disabledColor,
-          unselectedColor: child.props.unselectedColor || that.props.unselectedColor,
-          scale: child.props.scale || that.props.scale,
-          disabled: child.props.disabled || that.props.disabled,
+          tintColor: that.props.tintColor || child.props.tintColor,
+          disabledColor: that.props.disabledColor || child.props.disabledColor,
+          baseColor: that.props.baseColor || child.props.baseColor,
+          scale: that.props.scale || child.props.scale,
+          disabled: that.props.disabled || child.props.disabled,
           innerToOuterRatio: child.props.innerToOuterRatio || that.props.innerToOuterRatio,
-          labelHorizontal: child.props.labelHorizontal || that.props.labelHorizontal,
-          labelFontSize: child.props.labelFontSize || that.props.labelFontSize,
-          labelcolor: child.props.labelcolor || that.props.labelcolor
+          labelHorizontal: that.props.labelHorizontal !== undefined ?
+            that.props.labelHorizontal : child.props.labelHorizontal,
+          labelColor: that.props.labelColor || child.props.labelColor,
+          labelStyle: that.props.labelStyle || child.props.labelStyle
         });
       }
 

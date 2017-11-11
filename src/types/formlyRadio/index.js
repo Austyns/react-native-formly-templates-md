@@ -2,11 +2,12 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import { FieldMixin } from 'react-native-formly';
+import _ from 'lodash';
 import {
   View
 } from 'react-native';
-import RadioButton from './RadioButton';
-import RadioGroup from './RadioGroup';
+import RadioButton from './../../controls/radioButton';
+import RadioGroup from './../../controls/radioGroup';
 import * as helpers from './../../helpers';
 
 const FormlyRadio = createReactClass({
@@ -22,6 +23,7 @@ const FormlyRadio = createReactClass({
         description: PropTypes.string,
         label: PropTypes.string,
         placeholder: PropTypes.string,
+        inline: PropTypes.bool,
         labelProp: PropTypes.string,
         valueProp: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.any).isRequired
@@ -45,12 +47,12 @@ const FormlyRadio = createReactClass({
     const items = [];
     // check if the options is of type array
     if (Array.isArray(to.options)) {
-      to.options.forEach((option) => {
+      to.options.forEach((option, i) => {
         const {
           label,
           value
         } = helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
-        items.push(<RadioButton id={value} label={label} />);
+        items.push(<RadioButton key={i + _.toString(value)} id={value} label={label} />);
       }, this);
     }
 
@@ -68,7 +70,7 @@ const FormlyRadio = createReactClass({
           <RadioGroup
             selectedItem={viewValue}
             formHorizontal={to.inline}
-            labelHorizontal={to.labelHorizontal}
+            labelHorizontal={!to.labelVertical}
             disabled={to.disabled}
             onSelectionChange={this.onChange}
           >
