@@ -24,11 +24,14 @@ class FormlyRadio extends Component {
     // check if the options is of type array
     if (Array.isArray(to.options)) {
       to.options.forEach((option, i) => {
+        const currentRadioIndex = i;
         const {
           label,
           value
         } = helpers.extractLabelAndValueFromOption(to.labelProp, to.valueProp, option);
-        items.push(<RadioButton key={i + _.toString(value)} id={value} label={label} />);
+        items.push(
+          <RadioButton key={currentRadioIndex + _.toString(value)} id={value} label={label} />
+        );
       }, this);
     }
 
@@ -56,8 +59,8 @@ class FormlyRadio extends Component {
       </View>
     );
   }
+}
 
-};
 FormlyRadio.propTypes = {
   config: PropTypes.shape({
     key: PropTypes.string.isRequired,
@@ -76,8 +79,9 @@ FormlyRadio.propTypes = {
     })
   }).isRequired,
   model: PropTypes.any,
-  viewValues: PropTypes.any
-}
+  viewValues: PropTypes.any,
+  onChange: PropTypes.func
+};
 
 const defaultComponentStyle = {
   RadioContainer: {

@@ -58,7 +58,8 @@
     "react-addons-test-utils": "^15.6.2",
     "react-dom": "^16.0.0",
     "react-native": "0.47.2",
-    "react-native-formly": "0.0.1",
-    "react-test-renderer": "^16.0.0"
+    "react-native-formly": "1.0.0",
+    "react-test-renderer": "^16.0.0",
+    "create-react-class": "^15.6.2"
   }
 }

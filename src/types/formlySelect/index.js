@@ -83,9 +83,10 @@ FormlyTextInput.propTypes = {
   }).isRequired,
   model: PropTypes.any,
   viewValues: PropTypes.any,
+  onChange: PropTypes.func,
   fieldValidation: PropTypes.shape({
     messages: PropTypes.object
   })
-}
+};
 
 module.exports = FormlyTextInput;

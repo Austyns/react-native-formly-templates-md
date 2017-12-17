@@ -30,7 +30,8 @@ FormlyCheckbox.propTypes = {
       label: PropTypes.string
     })
   }).isRequired,
-  viewValues: PropTypes.any
+  viewValues: PropTypes.any,
+  onChange: PropTypes.func
 };
 const defaultComponentStyle = {
   RadioContainer: {
