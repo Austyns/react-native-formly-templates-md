@@ -1,7 +1,5 @@
-import React from 'react';
-import createReactClass from 'create-react-class';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FieldMixin } from 'react-native-formly';
 import _ from 'lodash';
 import {
   View
@@ -10,29 +8,7 @@ import RadioButton from './../../controls/radioButton';
 import RadioGroup from './../../controls/radioGroup';
 import * as helpers from './../../helpers';
 
-const FormlyRadio = createReactClass({
-  propTypes: {
-    config: PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      templateOptions: PropTypes.shape({
-        required: PropTypes.bool,
-        pattern: PropTypes.string,
-        minlength: PropTypes.number,
-        maxlength: PropTypes.number,
-        disabled: PropTypes.bool,
-        description: PropTypes.string,
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-        inline: PropTypes.bool,
-        labelProp: PropTypes.string,
-        valueProp: PropTypes.string,
-        options: PropTypes.arrayOf(PropTypes.any).isRequired
-      })
-    }).isRequired,
-    model: PropTypes.any,
-    viewValues: PropTypes.any
-  },
-  mixins: [FieldMixin],
+class FormlyRadio extends Component {
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
     const to = nextProps.config.templateOptions || {};
@@ -40,10 +16,10 @@ const FormlyRadio = createReactClass({
     if (model !== undefined &&
       !helpers.valueExistsInOptions(to.labelProp, to.valueProp, to.options, model)) {
       // if the value doesn't exists in options update the model with undefined
-      this.onChange(undefined);
+      this.props.onChange(undefined);
     }
-  },
-  _renderItemsFromTemplateOptions(to = {}) {
+  }
+  _renderItemsFromTemplateOptions = (to = {}) => {
     const items = [];
     // check if the options is of type array
     if (Array.isArray(to.options)) {
@@ -57,7 +33,7 @@ const FormlyRadio = createReactClass({
     }
 
     return items;
-  },
+  }
   render() {
     const key = this.props.config.key;
     const to = this.props.config.templateOptions || {};
@@ -72,7 +48,7 @@ const FormlyRadio = createReactClass({
             formHorizontal={to.inline}
             labelHorizontal={!to.labelVertical}
             disabled={to.disabled}
-            onSelectionChange={this.onChange}
+            onSelectionChange={this.props.onChange}
           >
             {this._renderItemsFromTemplateOptions(to)}
           </RadioGroup>
@@ -81,7 +57,27 @@ const FormlyRadio = createReactClass({
     );
   }
 
-});
+};
+FormlyRadio.propTypes = {
+  config: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    templateOptions: PropTypes.shape({
+      required: PropTypes.bool,
+      pattern: PropTypes.string,
+      minlength: PropTypes.number,
+      maxlength: PropTypes.number,
+      disabled: PropTypes.bool,
+      description: PropTypes.string,
+      label: PropTypes.string,
+      inline: PropTypes.bool,
+      labelProp: PropTypes.string,
+      valueProp: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.any).isRequired
+    })
+  }).isRequired,
+  model: PropTypes.any,
+  viewValues: PropTypes.any
+}
 
 const defaultComponentStyle = {
   RadioContainer: {

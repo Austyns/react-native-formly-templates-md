@@ -40,7 +40,6 @@ const defaultComponentStyle = StyleSheet.create({
   },
   Container: {
     flex: 1
-
   }
 });
 

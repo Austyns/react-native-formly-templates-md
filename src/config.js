@@ -11,6 +11,7 @@ const {
 const inputComponent = require('./types/formlyTextInput');
 const textareaComponent = require('./types/formlyTextarea');
 const radioComponent = require('./types/formlyRadio');
+const checkboxComponent = require('./types/formlyCheckbox');
 const selectComponent = require('./types/formlySelect');
 
 // require formly wrappers
@@ -33,6 +34,12 @@ FieldsConfig.addType([
     wrapper: ['label', 'descriptionOrError'],
     controller: ['templateOptionsValidators'],
     component: radioComponent
+  },
+  {
+    name: 'checkbox',
+    wrapper: ['descriptionOrError'],
+    controller: ['templateOptionsValidators'],
+    component: checkboxComponent
   },
   {
     name: 'select',

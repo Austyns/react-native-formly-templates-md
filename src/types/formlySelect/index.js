@@ -1,38 +1,12 @@
-import React from 'react';
-import createReactClass from 'create-react-class';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FieldMixin } from 'react-native-formly';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
   View
 } from 'react-native';
 import * as helpers from './../../helpers';
 
-const FormlyTextInput = createReactClass({
-  propTypes: {
-    config: PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      templateOptions: PropTypes.shape({
-        required: PropTypes.bool,
-        pattern: PropTypes.string,
-        minlength: PropTypes.number,
-        maxlength: PropTypes.number,
-        disabled: PropTypes.bool,
-        description: PropTypes.string,
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-        labelProp: PropTypes.string,
-        valueProp: PropTypes.string,
-        options: PropTypes.arrayOf(PropTypes.any).isRequired
-      })
-    }).isRequired,
-    model: PropTypes.any,
-    viewValues: PropTypes.any,
-    fieldValidation: PropTypes.shape({
-      messages: PropTypes.object
-    })
-  },
-  mixins: [FieldMixin],
+class FormlyTextInput extends Component {
   componentWillReceiveProps(nextProps) {
     const key = nextProps.config.key;
     const to = nextProps.config.templateOptions || {};
@@ -40,10 +14,10 @@ const FormlyTextInput = createReactClass({
     if (model !== undefined &&
       !helpers.valueExistsInOptions(to.labelProp, to.valueProp, to.options, model)) {
       // if the value doesn't exists in options update the model with undefined
-      this.onChange(undefined);
+      this.props.onChange(undefined);
     }
-  },
-  _dataFromTemplateOptions(to = {}) {
+  }
+  _dataFromTemplateOptions = (to = {}) => {
     let items = [];
     // check if the options is of type array
     if (Array.isArray(to.options)) {
@@ -53,7 +27,8 @@ const FormlyTextInput = createReactClass({
     }
 
     return items;
-  },
+  }
+
   render() {
     const key = this.props.config.key;
     const to = this.props.config.templateOptions || {};
@@ -77,7 +52,7 @@ const FormlyTextInput = createReactClass({
           disabled={to.disabled}
           data={this._dataFromTemplateOptions(to)}
           value={viewValue}
-          onChangeText={this.onChange}
+          onChangeText={this.props.onChange}
           title={to.description}
           animationDuration={150}
           error={!fieldValidationResult.isValid ? (firstMessage || ' ') : null}
@@ -87,6 +62,30 @@ const FormlyTextInput = createReactClass({
       </View>
     );
   }
-});
+}
+
+FormlyTextInput.propTypes = {
+  config: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    templateOptions: PropTypes.shape({
+      required: PropTypes.bool,
+      pattern: PropTypes.string,
+      minlength: PropTypes.number,
+      maxlength: PropTypes.number,
+      disabled: PropTypes.bool,
+      description: PropTypes.string,
+      label: PropTypes.string,
+      placeholder: PropTypes.string,
+      labelProp: PropTypes.string,
+      valueProp: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.any).isRequired
+    })
+  }).isRequired,
+  model: PropTypes.any,
+  viewValues: PropTypes.any,
+  fieldValidation: PropTypes.shape({
+    messages: PropTypes.object
+  })
+}
 
 module.exports = FormlyTextInput;

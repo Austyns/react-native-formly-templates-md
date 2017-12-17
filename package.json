@@ -1,6 +1,6 @@
 {
   "name": "react-native-formly-templates-md",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Ready made materialized components for your react-native formly forms",
   "main": "src/index.js",
   "scripts": {
@@ -12,7 +12,6 @@
     "setupTestFrameworkScriptFile": "./setupTests.js"
   },
   "dependencies": {
-    "create-react-class": "15.6.2",
     "lodash": "4.17.4",
     "prop-types": "15.6.0",
     "react-native-material-dropdown": "0.4.1",
