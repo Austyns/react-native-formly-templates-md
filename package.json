@@ -14,9 +14,9 @@
   "dependencies": {
     "lodash": "4.17.4",
     "prop-types": "15.6.0",
-    "react-native-material-dropdown": "0.4.1",
+    "react-native-material-dropdown": "0.6.1",
     "react-native-material-ripple": "0.7.5",
-    "react-native-material-textfield": "0.10.0"
+    "react-native-material-textfield": "0.12.0"
   },
   "peerDependencies": {
     "react": "*",
