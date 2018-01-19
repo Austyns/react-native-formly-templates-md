@@ -55,7 +55,7 @@ class FormlyTextInput extends Component {
           onChangeText={this.props.onChange}
           title={to.description}
           animationDuration={150}
-          error={!fieldValidationResult.isValid ? (firstMessage || ' ') : null}
+          error={fieldValidationResult.isValid === false ? (firstMessage || ' ') : null}
         />
         {/* if the field is invalid while there are no messages string with empty space
            should be given to the error property so it gives the error style to the component */}

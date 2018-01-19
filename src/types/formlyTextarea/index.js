@@ -44,7 +44,7 @@ class FormlyTextarea extends Component {
           autoCapitalize="none"
           autoCorrect={false}
           multiline
-          error={!fieldValidationResult.isValid ? (firstMessage || ' ') : null}
+          error={fieldValidationResult.isValid === false ? (firstMessage || ' ') : null}
         />
         {/* if the field is invalid while there are no messages string with empty space
            should be given to the error property so it gives the error style to the component */}
