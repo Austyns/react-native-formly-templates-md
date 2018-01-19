@@ -23,6 +23,7 @@ class FormlyTextarea extends Component {
     const key = this.props.config.key;
     const to = this.props.config.templateOptions || {};
     const viewValue = this.props.viewValues[key];
+    const modelValue = this.props.model[key];
     const label = to.label ? (to.label + (to.required ? ' *' : '')) : '';
 
     // validations        
@@ -36,7 +37,7 @@ class FormlyTextarea extends Component {
           label={label}
           placeholder={to.placeholder}
           disabled={to.disabled}
-          value={_.toString(viewValue)}
+          value={_.toString(viewValue || modelValue)}
           onChangeText={this.props.onChange}
           characterRestriction={to.maxlength}
           title={to.description}
@@ -69,6 +70,7 @@ FormlyTextarea.propTypes = {
     })
   }).isRequired,
   viewValues: PropTypes.any,
+  model: PropTypes.object,
   onChange: PropTypes.func,
   fieldValidation: PropTypes.shape({
     messages: PropTypes.object
